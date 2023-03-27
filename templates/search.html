@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  </div>
+
+    <div class="container">
+        <h1 class="search-head">Search results for "{{ query }}"</h1>
+        <div class="l-cards">
+        {% for anime in data %}
+        <article class="c-card">
+            <div class="card-flyer">
+            <div class="c-card__image">
+                <a href="{% url 'detail' anime_id=anime.mal_id %}">
+                <img
+                    src="{{ anime.images.jpg.image_url }}"
+                    alt="{{ anime.title }}">
+                </a>
+            </div>
+            </div>
+            <div class="c-card-text">
+            <h5>{{ anime.title }}</h5>
+            </div>
+        </article>
+        {% endfor %} 
+        </div>
+
+        <nav aria-label="Page navigation" class="dark-mode">
+            <ul class="pagination dark-mode">
+              <li class="page-item {% if current_page == 1 %}disabled{% endif %}">
+                {% if current_page == 1 %}
+                <span class="page-link" aria-label="Previous">
+                {% else %}
+                <a class="page-link" href="{% url 'search_page' page=current_page|add:"-1" %}?query={{ query|urlencode }}" aria-label="Previous">
+                {% endif %}
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                {% if current_page != 1 %}</a>{% else %}</span>{% endif %}
+              </li>
+              {% if current_page == 2 %}
+              <li class="page-item">
+                <a class="page-link" href="{% url 'search_page' page=current_page|add:"-1" %}?query={{ query|urlencode }}">{{ current_page|add:"-1" }}</a>
+              </li>
+              {% elif current_page >= 3 %}
+              <li class="page-item">
+                <a class="page-link" href="{% url 'search_page' page=current_page|add:"-2" %}?query={{ query|urlencode }}">{{ current_page|add:"-2" }}</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="{% url 'search_page' page=current_page|add:"-1" %}?query={{ query|urlencode }}">{{ current_page|add:"-1" }}</a>
+              </li>
+              {% endif %}
+              <li class="page-item active">
+                <span class="page-link">{{ current_page }}</span>
+              </li>
+              {% if has_next_page %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'search_page' page=current_page|add:"1" %}?query={{ query|urlencode }}">{{ current_page|add:"1" }}</a>
+                </li>
+                {% if has_next_next_page %}
+                    <li class="page-item">
+                    <a class="page-link" href="{% url 'search_page' page=current_page|add:"2" %}?query={{ query|urlencode }}">{{ current_page|add:"2" }}</a>
+                    </li>
+                {% endif %}
+              {% endif %}
+              <li class="page-item {% if not has_next_page %}disabled{% endif %}">
+                <a class="page-link" href="{% url 'search_page' page=current_page|add:"1" %}?query={{ query|urlencode }}" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+{% endblock %}

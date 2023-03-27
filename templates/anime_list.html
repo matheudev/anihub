@@ -1,0 +1,179 @@
+{% extends "layout.html" %}
+
+{% block title %}Anime List{% endblock title %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="dropdown filter-dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="filterDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter by status
+        </button>
+        <div class="dropdown-menu" aria-labelledby="filterDropdownButton">
+            <a class="dropdown-item" href="#" data-filter="all">All</a>
+            {% for status, status_display in status_choices %}
+                <a class="dropdown-item" href="#" data-filter="{{ status }}">{{ status_display }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <h2 id="selected-filter-heading"></h2>
+    {% for status, status_display in status_choices %}
+        <h2 class="statusDisplay">{{ status_display }}</h2>
+        <div class="l-cards" id="status_list_{{ status }}">
+            {% for anime_data, anime_status in animelist %}
+                {% if anime_status == status %}
+                    <article class="c-card" id="anime_item_{{ anime_data.anime_id }}">
+                        <div class="card-flyer">
+                            <div class="c-card__image">
+                                <a href="{% url 'detail' anime_id=anime_data.anime_id %}">
+                                <img
+                                    src="{{ anime_data.picture }}"
+                                    alt="{{ anime_data.title }}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="c-card-text">
+                            <h5>{{ anime_data.title }}</h5>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_{{ anime_data.anime_id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ status_display }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_{{ anime_data.anime_id }}">
+                                {% for stat, stat_display in status_choices %}
+                                    <a class="dropdown-item" href="#" data-anime-id="{{ anime_data.anime_id }}" data-status="{{ stat }}">{{ stat_display }}</a>
+                                {% endfor %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="#" data-anime-id="{{ anime_data.anime_id }}" data-action="remove">Remove from list</a>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% if not forloop.last %}
+            <hr class="list-separator">
+        {% endif %}
+    {% endfor %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+</div>
+
+<script>
+    function moveAnimeToSection(animeId, status) {
+        const animeListItem = document.getElementById('anime_item_' + animeId);
+        const targetList = document.getElementById('status_list_' + status);
+        targetList.appendChild(animeListItem);
+    }
+
+    function removeAnimeFromWatchlist(animeId) {
+        const animeListItem = document.getElementById('anime_item_' + animeId);
+        animeListItem.remove();
+    }
+
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', event => {
+            event.preventDefault();
+            const animeId = event.target.dataset.animeId;
+            const status = event.target.dataset.status;
+            const action = event.target.dataset.action;
+            const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+            if (action === 'remove') {
+                fetch('{% url "remove_anime_from_list" anime_id=0 %}'.replace('0', animeId), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        removeAnimeFromWatchlist(animeId);
+                    } else {
+                        alert('Failed to remove the anime. Please try again.');
+                    }
+                });
+            } else {
+                fetch('{% url "update_anime_status" anime_id=0 %}'.replace('0', animeId), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({status: status})
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        const mainButton = document.getElementById('dropdownMenuButton_' + animeId);
+                        mainButton.textContent = event.target.textContent;
+                        mainButton.classList.remove('btn-primary');
+                        mainButton.classList.add('btn-secondary');
+                        moveAnimeToSection(animeId, status);
+                    } else {
+                        alert('Failed to update the status. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+
+    function filterAnimeList(filter, filterText) {
+        const statusDisplays = document.querySelectorAll('.statusDisplay');
+        const statusLists = document.querySelectorAll('[id^="status_list_"]');
+        const selectedFilterHeading = document.getElementById('selected-filter-heading');
+        const listSeparators = document.querySelectorAll('.list-separator');
+
+        if (filter === 'all') {
+            selectedFilterHeading.style.display = 'none';
+        } else {
+            selectedFilterHeading.style.display = 'block';
+        }
+
+        statusDisplays.forEach((statusDisplay) => {
+            // Check if the current statusDisplay matches the filter
+            if (statusDisplay.textContent === filterText) {
+                // Keep the heading visible for the selected filter
+                statusDisplay.style.display = 'block';
+            } else if (filter === 'all') {
+                // Show all headings if the filter is 'all'
+                statusDisplay.style.display = 'block';
+            } else {
+                // Hide the headings that don't match the filter
+                statusDisplay.style.display = 'none';
+            }
+        });
+
+        statusLists.forEach((statusList) => {
+            if (filter === 'all' || statusList.id === `status_list_${filter}`) {
+                statusList.style.display = 'flex';
+            } else {
+                statusList.style.display = 'none';
+            }
+        });
+
+        listSeparators.forEach((listSeparator) => {
+            listSeparator.style.display = filter === 'all' ? 'block' : 'none';
+        });
+    }
+
+    document.querySelectorAll('.dropdown-item[data-filter]').forEach(item => {
+        item.addEventListener('click', event => {
+            event.preventDefault();
+            const filter = event.target.dataset.filter;
+            const filterText = event.target.textContent;
+            filterAnimeList(filter, filterText);
+        });
+    });
+
+</script>
+
+{% endblock %}

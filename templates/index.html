@@ -1,0 +1,50 @@
+{% extends "layout.html" %} {% block title %} Home Page {% endblock title%} {% block content %}
+<div class="container">
+    <h2 class="index-title">Popular Anime</h2>
+    <div class="searchCardGrid">
+        <div class="l-cards">
+            {% for anime in top_anime %}
+            <article class="c-card">
+                <div class="card-flyer">
+                    <div class="c-card__image">
+                        <a href="{% url 'detail' anime_id=anime.mal_id %}">
+                            <img src="{{ anime.images.jpg.image_url }}" alt="{{ anime.title }}">
+                        </a>
+                    </div>
+                </div>
+                <div class="c-card-text">
+                    <h5>{{ anime.title }}</h5>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{% url 'topanime' %}" class="btn btn-primary" id="index-button">All Popular Anime</a>
+    </div>
+
+    <h2 class="index-title">Current Season Anime</h2>
+    <div class="searchCardGrid">
+        <div class="l-cards">
+            {% for anime in season_anime %}
+            <article class="c-card">
+                <div class="card-flyer">
+                    <div class="c-card__image">
+                        <a href="{% url 'detail' anime_id=anime.mal_id %}">
+                            <img src="{{ anime.images.jpg.image_url }}" alt="{{ anime.title }}">
+                        </a>
+                    </div>
+                </div>
+                <div class="c-card-text">
+                    <h5>{{ anime.title }}</h5>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{% url 'season' %}" class="btn btn-primary" id="index-button">All Seasonal Anime</a>
+    </div>
+</div>
+
+{% endblock content %}
