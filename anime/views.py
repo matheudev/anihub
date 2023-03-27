@@ -14,10 +14,6 @@ from datetime import datetime
 
 from .models import AnimeList, AnimeData, Comment, Reply
 
-from jikanpy import Jikan
-
-jikan = Jikan()
-
 # Create your views here.
 def index(request):
     # Top 6 popular anime

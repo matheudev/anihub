@@ -1,0 +1,31 @@
+# .gitignore
+
+# Ignore virtual environment folder
+venv/
+animelist/.env
+
+# Ignore SQLite database files
+*.sqlite3
+
+# Ignore PyCharm project files
+.idea/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyco
+*.pyc.py
+*.pyo.py
+
+# Ignore other unnecessary files
+*.log
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+*.tmp.*
+*.temp.*
+*.DS_Store
