@@ -286,6 +286,7 @@ footer.realnavbar {
         display: block;
         position: absolute;
         left: 50px;
+        font-size: 31px;
       }
 
     .navbar {
@@ -375,6 +376,7 @@ footer.realnavbar {
         border-radius: 10px;
         transition: all .50s ease;
         z-index: 9999;
+        margin-top: 10px;
       }
     .search-form.open {
         display: flex;
@@ -411,6 +413,7 @@ footer.realnavbar {
     -moz-transition: all .9s ease;
     -o-transition: all .9s ease;
     -ms-transition: all .9s ease;
+    transition: all .9s ease;
 }
 .l-cards .card-flyer:hover .c-card__image img {
     -webkit-transform: scale(1.15);
@@ -588,6 +591,7 @@ footer.realnavbar {
 }
 
 .search-btn {
+    border: none;
     width: 0px;
     height: 0px;
     border-radius: 50%;

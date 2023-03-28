@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (savedTheme) {
         body.classList.add(savedTheme);
         updateThemeIcon(savedTheme);
+      } else {
+        body.classList.add('white-theme');
       }
     
       // Toggle theme and save the preference in localStorage
