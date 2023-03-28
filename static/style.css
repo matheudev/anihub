@@ -105,6 +105,7 @@ header#realnavbar {
     padding: 0px 12%;
     transition: all .50s ease;
     margin-bottom: 40px;
+    position: relative;
 }
 
 footer.realnavbar {
@@ -144,12 +145,13 @@ footer.realnavbar {
 
 .navbar {
     display: flex;
+    flex-wrap: nowrap;
 }
 
 .ultrabar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     margin-top: 15px;
 }
 
@@ -159,10 +161,6 @@ footer.realnavbar {
 
 .baruseroff {
     margin-left: 100px;
-}
-
-#animelistnav {
-    margin-right: 46px;
 }
 
 .navbar a {
@@ -238,6 +236,14 @@ footer.realnavbar {
     display: none;
 }
 
+@media (min-width: 1440px) {
+    #animelistnav {
+        margin-right: 46px;
+    }
+    #logosmall {
+        display: none;
+    }
+}
 
 @media (max-width: 1280px){
     header {
@@ -250,14 +256,42 @@ footer.realnavbar {
     }
 }
 
-@media (max-width: 1090px) {
-    #menu-icon {
-      display: block;
+@media (max-width: 1440px) {
+    header#realnavbar {
+        height: 83.41px;
     }
+    #logolarge {
+        display: none;
+    }
+
+    #logosmall {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #menu-icon.menuleft {
+        display: block;
+        position: absolute;
+        left: 10px;
+    }
+    #menu-icon.menuright {
+        display: block;
+        position: absolute;
+        right: 10px;
+    }
+
+    #menu-icon.search {
+        display: block;
+        position: absolute;
+        left: 50px;
+      }
+
     .navbar {
       position: absolute;
       top: 60px;
-      right: 10px;
+      left: 10px;
       width: 100%;
       max-width: 270px;
       height: auto;
@@ -268,6 +302,14 @@ footer.realnavbar {
       border-radius: 10px;
       transition: all .50s ease;
       z-index: 9999;
+    }
+    .main .profile {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+
+    .main #theme-toggle {
+        margin-left: 40px;
     }
     .navbar.open {
       display: flex;
@@ -287,6 +329,70 @@ footer.realnavbar {
     .navbar a.active {
       color: var(--main-color);
     }
+    .main {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 100%;
+        max-width: 270px;
+        height: auto;
+        background-color: var(--header-color);
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-radius: 10px;
+        transition: all .50s ease;
+        z-index: 9999;
+      }
+    .main.open {
+        display: flex;
+      }
+    .main a {
+        margin: 12px 0;
+        padding: 10px 25px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-color);
+        transition: all .50s ease;
+      }
+    .main a:hover {
+        color: var(--main-color);
+      }
+    .main a.active {
+        color: var(--main-color);
+      }
+    .search-form {
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        width: 100%;
+        max-width: 270px;
+        height: auto;
+        background-color: transparent;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        border-radius: 10px;
+        transition: all .50s ease;
+        z-index: 9999;
+      }
+    .search-form.open {
+        display: flex;
+      }
+    .search-form a {
+        margin: 12px 0;
+        padding: 10px 25px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-color);
+        transition: all .50s ease;
+      }
+    .search-form a:hover {
+        color: var(--main-color);
+      }
+    .search-form a.active {
+        color: var(--main-color);
+      }
   }
 
 .l-cards a {

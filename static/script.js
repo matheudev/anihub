@@ -1,8 +1,41 @@
-let menu = document.querySelector('#menu-icon');
+let menuleft = document.querySelector('#menu-icon.menuleft');
+let menuright = document.querySelector('#menu-icon.menuright');
+let search = document.querySelector('#menu-icon.search');
 let navbar = document.querySelector('.navbar');
+let main = document.querySelector('.main');
+let searchform = document.querySelector('.search-form');
 
-menu.onclick = () => {
-  menu.classList.toggle('bx-x');
+menuright.onclick = () => {
+    menuright.classList.toggle('bx-x');
+    main.classList.toggle('open');
+    if (main.classList.contains('open')) {
+        main.style.display = 'flex';
+    } else {
+        main.style.display = 'none';
+    }
+}
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1440) {
+        main.style.display = 'flex';
+    } else {
+        main.style.display = 'none';
+    }
+});
+
+window.addEventListener('click', (event) => {
+    // If the clicked element is not within the main or menu button
+    if (window.innerWidth < 1440) {
+        if (!main.contains(event.target) && event.target !== menuright) {
+            main.classList.remove('open');
+            main.style.display = 'none';
+            menuright.classList.remove('bx-x');
+        }
+    }
+});
+  
+menuleft.onclick = () => {
+  menuleft.classList.toggle('bx-x');
   navbar.classList.toggle('open');
   if (navbar.classList.contains('open')) {
     navbar.style.display = 'flex';
@@ -12,7 +45,7 @@ menu.onclick = () => {
 }
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 1090) {
+  if (window.innerWidth > 1440) {
     navbar.style.display = 'flex';
   } else {
     navbar.style.display = 'none';
@@ -21,15 +54,43 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('click', (event) => {
   // If the clicked element is not within the navbar or menu button
-  if (window.innerWidth < 1090) {
-    if (!navbar.contains(event.target) && event.target !== menu) {
+  if (window.innerWidth < 1440) {
+    if (!navbar.contains(event.target) && event.target !== menuleft) {
         navbar.classList.remove('open');
         navbar.style.display = 'none';
-        menu.classList.remove('bx-x');
+        menuleft.classList.remove('bx-x');
       }
   }
 });
 
+search.onclick = () => {
+    search.classList.toggle('bx-x');
+    searchform.classList.toggle('open');
+    if (searchform.classList.contains('open')) {
+        searchform.style.display = 'flex';
+    } else {
+        searchform.style.display = 'none';
+    }
+}
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1440) {
+        searchform.style.display = 'flex';
+    } else {
+        searchform.style.display = 'none';
+    }
+});
+
+window.addEventListener('click', (event) => {
+    // If the clicked element is not within the searchform or menu button
+    if (window.innerWidth < 1440) {
+        if (!searchform.contains(event.target) && event.target !== search) {
+            searchform.classList.remove('open');
+            searchform.style.display = 'none';
+            search.classList.remove('bx-x');
+        }
+    }
+});
 
 const formGroups = document.querySelectorAll('.form-group-s');
 const seasonalFormGroups = document.querySelectorAll('.seasonal-form-group');
