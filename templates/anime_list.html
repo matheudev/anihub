@@ -2,6 +2,8 @@
 
 {% block title %}Anime List{% endblock title %}
 
+{% load get_item %}
+
 {% block content %}
 
 
@@ -17,40 +19,41 @@
             {% endfor %}
         </div>
     </div>
-    <h2 id="selected-filter-heading"></h2>
     {% for status, status_display in status_choices %}
-        <h2 class="statusDisplay">{{ status_display }}</h2>
-        <div class="l-cards" id="status_list_{{ status }}">
-            {% for anime_data, anime_status in animelist %}
-                {% if anime_status == status %}
-                    <article class="c-card" id="anime_item_{{ anime_data.anime_id }}">
-                        <div class="card-flyer">
-                            <div class="c-card__image">
-                                <a href="{% url 'detail' anime_id=anime_data.anime_id %}">
-                                <img
-                                    src="{{ anime_data.picture }}"
-                                    alt="{{ anime_data.title }}">
-                                </a>
+        <div class="searchCardGrid">
+            <h2 class="statusDisplay">{{ status_display }} ({{ status_counts|get_item:status_display }})</h2>
+            <div class="l-cards" id="status_list_{{ status }}">
+                {% for anime_data, anime_status in animelist %}
+                    {% if anime_status == status %}
+                        <article class="c-card" id="anime_item_{{ anime_data.anime_id }}">
+                            <div class="card-flyer">
+                                <div class="c-card__image">
+                                    <a href="{% url 'detail' anime_id=anime_data.anime_id %}">
+                                    <img
+                                        src="{{ anime_data.picture }}"
+                                        alt="{{ anime_data.title }}">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="c-card-text">
-                            <h5>{{ anime_data.title }}</h5>
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_{{ anime_data.anime_id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ status_display }}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_{{ anime_data.anime_id }}">
-                                {% for stat, stat_display in status_choices %}
-                                    <a class="dropdown-item" href="#" data-anime-id="{{ anime_data.anime_id }}" data-status="{{ stat }}">{{ stat_display }}</a>
-                                {% endfor %}
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#" data-anime-id="{{ anime_data.anime_id }}" data-action="remove">Remove from list</a>
+                            <div class="c-card-text">
+                                <h5>{{ anime_data.title }}</h5>
                             </div>
-                        </div>
-                    </article>
-                {% endif %}
-            {% endfor %}
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_{{ anime_data.anime_id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ status_display }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_{{ anime_data.anime_id }}">
+                                    {% for stat, stat_display in status_choices %}
+                                        <a class="dropdown-item" href="#" data-anime-id="{{ anime_data.anime_id }}" data-status="{{ stat }}">{{ stat_display }}</a>
+                                    {% endfor %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#" data-anime-id="{{ anime_data.anime_id }}" data-action="remove">Remove from list</a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
         {% if not forloop.last %}
             <hr class="list-separator">
@@ -129,18 +132,11 @@
     function filterAnimeList(filter, filterText) {
         const statusDisplays = document.querySelectorAll('.statusDisplay');
         const statusLists = document.querySelectorAll('[id^="status_list_"]');
-        const selectedFilterHeading = document.getElementById('selected-filter-heading');
         const listSeparators = document.querySelectorAll('.list-separator');
-
-        if (filter === 'all') {
-            selectedFilterHeading.style.display = 'none';
-        } else {
-            selectedFilterHeading.style.display = 'block';
-        }
 
         statusDisplays.forEach((statusDisplay) => {
             // Check if the current statusDisplay matches the filter
-            if (statusDisplay.textContent === filterText) {
+            if (statusDisplay.textContent.startsWith(filterText)) {
                 // Keep the heading visible for the selected filter
                 statusDisplay.style.display = 'block';
             } else if (filter === 'all') {

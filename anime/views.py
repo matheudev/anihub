@@ -8,11 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 
 from urllib.parse import urlencode
 from datetime import datetime
 
-from .models import AnimeList, AnimeData, Comment, Reply
+from .models import AnimeList, AnimeData, Comment
+from .utils import parse_anime_ids_from_xml
 
 # Create your views here.
 def index(request):
@@ -306,14 +308,26 @@ def update_anime_status(request, anime_id):
 
 def animelist(request):
     user_anime_list = AnimeList.objects.filter(user=request.user)
+    watching = user_anime_list.filter(status='watching').count()
+    completed = user_anime_list.filter(status='completed').count()
+    dropped = user_anime_list.filter(status='dropped').count()
+    plan_to_watch = user_anime_list.filter(status='plan to watch').count()
+    status_counts = {
+        'Watching': watching,
+        'Completed': completed,
+        'Dropped': dropped,
+        'Plan to Watch': plan_to_watch,
+    }
     animelist = []
-    for anime in user_anime_list:
-        id = int(anime.anime_id)
-        anime_data = AnimeData.objects.get(anime_id=id)
+    anime_list_with_data = [(AnimeData.objects.get(anime_id=int(anime.anime_id)), anime) for anime in user_anime_list]
+    sorted_anime_list_with_data = sorted(anime_list_with_data, key=lambda x: x[0].title.lower())
+
+    for anime_data, anime in sorted_anime_list_with_data:
         animelist.append((anime_data, anime.status))
     return render(request, 'anime_list.html', {
         'status_choices': AnimeList.STATUS_CHOICES,
         'animelist': animelist,
+        'status_counts': status_counts,
     })
 
 from django.http import JsonResponse
@@ -368,3 +382,34 @@ def delete_comment(request, comment_id):
             response_data['success'] = True
 
     return JsonResponse(response_data)
+
+@login_required
+def import_anime_list(request):
+    if request.method == 'POST':
+        xml_file = request.FILES.get('anime_list_file', None)
+        overwrite_existing = request.POST.get('overwrite_existing', None)
+
+        if xml_file:
+            anime_data = parse_anime_ids_from_xml(xml_file)
+
+            if overwrite_existing:
+                AnimeList.objects.filter(user=request.user).delete()
+
+            for anime_entry in anime_data:
+                anime_id = anime_entry['anime_id']
+                status = anime_entry['status'].lower()
+
+                if status != 'on_hold':
+                    existing_anime = AnimeList.objects.filter(anime_id=anime_id, user=request.user).first()
+
+                    if not existing_anime:
+                        AnimeList.objects.create(anime_id=anime_id, user=request.user, status=status)
+
+            messages.success(request, 'Anime list imported successfully!')
+        else:
+            messages.error(request, 'Please upload a valid XML file.')
+
+        return redirect('importlist')  # Replace 'profile' with the name of your profile URL
+    else:
+        # If the request is not a POST request, redirect to the profile page
+        return render(request, 'importlist.html')

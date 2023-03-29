@@ -102,7 +102,7 @@ header#realnavbar {
     align-items: center;
     justify-content: space-between;
     background: var(--header-color);
-    padding: 0px 12%;
+    padding: 15px 20%;
     transition: all .50s ease;
     margin-bottom: 40px;
     position: relative;
@@ -146,6 +146,8 @@ footer.realnavbar {
 .navbar {
     display: flex;
     flex-wrap: nowrap;
+    padding: 0;
+    justify-content: space-between;
 }
 
 .ultrabar {
@@ -153,14 +155,7 @@ footer.realnavbar {
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
-}
-
-.baruseron {
-    margin-left: 82px;
-}
-
-.baruseroff {
-    margin-left: 100px;
+    margin-right: 65px;
 }
 
 .navbar a {
@@ -168,7 +163,7 @@ footer.realnavbar {
     font-size: 1.1rem;
     font-weight: 500;
     padding: 5px 0;
-    margin: 0px 20px;
+    margin-right: 40px;
     transition: all .50s ease;
 }
 
@@ -236,27 +231,85 @@ footer.realnavbar {
     display: none;
 }
 
-@media (min-width: 1440px) {
-    #animelistnav {
-        margin-right: 46px;
+.main {
+    position: absolute;
+    top: 60px;
+    right: 19.8%;
+    width: 100%;
+    max-width: 270px;
+    height: auto;
+    background-color: var(--header-color);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    transition: all .50s ease;
+    z-index: 9999;
+  }
+
+@media (max-width: 1600px) {
+    header#realnavbar {
+        padding: 15px 15%;
     }
+    .main {
+        right: 14.8%;
+    }
+}
+
+.main.open {
+    display: flex;
+  }
+.main a {
+    margin: 12px 0;
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: all .50s ease;
+  }
+.main a:hover {
+    color: var(--main-color);
+  }
+.main a.active {
+    color: var(--main-color);
+  }
+
+.main .profile {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+.main .user {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.main #theme-toggle {
+    margin-left: 40px;
+}
+
+#menu-icon.menuright {
+    display: block;
+    right: 10px;
+}
+
+@media (min-width: 1170px) {
+    /*#animelistnav {
+        margin-right: 46px;
+    }*/
     #logosmall {
         display: none;
     }
 }
 
-@media (max-width: 1280px){
-    header {
-        padding: 14px 2%;
-        transition: .2s;
-    }
-    .navbar a {
-        padding: 5px 0;
-        margin: 0px 20px;
-    }
+.search-form{
+    margin-left: auto;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1170px) {
+    .main {
+        right: 10px;
+    }
     header#realnavbar {
         height: 83.41px;
     }
@@ -271,17 +324,16 @@ footer.realnavbar {
         top: 50%;
         transform: translate(-50%, -50%);
     }
-    #menu-icon.menuleft {
-        display: block;
-        position: absolute;
-        left: 10px;
-    }
     #menu-icon.menuright {
         display: block;
         position: absolute;
         right: 10px;
     }
-
+    #menu-icon.menuleft {
+        display: block;
+        position: absolute;
+        left: 10px;
+    }
     #menu-icon.search {
         display: block;
         position: absolute;
@@ -308,6 +360,10 @@ footer.realnavbar {
         margin-left: 0;
         margin-right: 5px;
     }
+    .main .user {
+        margin-left: 0;
+        margin-right: 10px;
+    }
 
     .main #theme-toggle {
         margin-left: 40px;
@@ -330,38 +386,6 @@ footer.realnavbar {
     .navbar a.active {
       color: var(--main-color);
     }
-    .main {
-        position: absolute;
-        top: 60px;
-        right: 10px;
-        width: 100%;
-        max-width: 270px;
-        height: auto;
-        background-color: var(--header-color);
-        display: none;
-        flex-direction: column;
-        justify-content: flex-start;
-        border-radius: 10px;
-        transition: all .50s ease;
-        z-index: 9999;
-      }
-    .main.open {
-        display: flex;
-      }
-    .main a {
-        margin: 12px 0;
-        padding: 10px 25px;
-        font-size: 1.2rem;
-        font-weight: 500;
-        color: var(--text-color);
-        transition: all .50s ease;
-      }
-    .main a:hover {
-        color: var(--main-color);
-      }
-    .main a.active {
-        color: var(--main-color);
-      }
     .search-form {
         position: absolute;
         top: 60px;
@@ -377,6 +401,7 @@ footer.realnavbar {
         transition: all .50s ease;
         z-index: 9999;
         margin-top: 10px;
+        margin-left: auto;
       }
     .search-form.open {
         display: flex;
@@ -461,6 +486,12 @@ footer.realnavbar {
     justify-content: start;
   }
 
+@media (max-width: 1199px) {
+    .l-cards {
+        margin-left: -20px;
+        justify-content: center;
+    }
+}
 .searchCardGrid {
     margin-left: 20px;
 }
@@ -630,6 +661,24 @@ footer.realnavbar {
     margin-bottom: 30px;
     margin-left: 9px;
 }
+
+@media (max-width: 1999px) {
+    .statusDisplay {
+        margin-left: 55px;
+    }
+}
+
+@media (max-width: 991.9px) {
+    .statusDisplay {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+.importlist-form {
+    margin: 0 300px;
+}
+
 .filter-dropdown {
     margin-bottom: 20px;
 }
@@ -818,7 +867,7 @@ footer.realnavbar {
     font-size: 1.1rem;
     font-weight: 500;
     padding: 5px 0;
-    margin: 0px 20px;
+    /*margin: 0px 20px;*/
     transition: all .50s ease;
   }
   
@@ -1003,6 +1052,8 @@ body {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 .asbtn {

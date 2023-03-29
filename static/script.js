@@ -15,22 +15,12 @@ menuright.onclick = () => {
     }
 }
 
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 1440) {
-        main.style.display = 'flex';
-    } else {
-        main.style.display = 'none';
-    }
-});
-
 window.addEventListener('click', (event) => {
     // If the clicked element is not within the main or menu button
-    if (window.innerWidth < 1440) {
-        if (!main.contains(event.target) && event.target !== menuright) {
-            main.classList.remove('open');
-            main.style.display = 'none';
-            menuright.classList.remove('bx-x');
-        }
+    if (!main.contains(event.target) && event.target !== menuright) {
+        main.classList.remove('open');
+        main.style.display = 'none';
+        menuright.classList.remove('bx-x');
     }
 });
   
@@ -45,7 +35,7 @@ menuleft.onclick = () => {
 }
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 1440) {
+  if (window.innerWidth > 1170) {
     navbar.style.display = 'flex';
   } else {
     navbar.style.display = 'none';
@@ -54,7 +44,7 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('click', (event) => {
   // If the clicked element is not within the navbar or menu button
-  if (window.innerWidth < 1440) {
+  if (window.innerWidth < 1170) {
     if (!navbar.contains(event.target) && event.target !== menuleft) {
         navbar.classList.remove('open');
         navbar.style.display = 'none';
@@ -74,7 +64,7 @@ search.onclick = () => {
 }
 
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 1440) {
+    if (window.innerWidth > 1170) {
         searchform.style.display = 'flex';
     } else {
         searchform.style.display = 'none';
@@ -83,7 +73,7 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('click', (event) => {
     // If the clicked element is not within the searchform or menu button
-    if (window.innerWidth < 1440) {
+    if (window.innerWidth < 1170) {
         if (!searchform.contains(event.target) && event.target !== search) {
             searchform.classList.remove('open');
             searchform.style.display = 'none';
@@ -215,5 +205,3 @@ filterForm.addEventListener('submit', (e) => {
 document.getElementById('filter-form').addEventListener('click', (e) => {
     e.stopPropagation();
 });
-
-

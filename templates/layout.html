@@ -42,7 +42,7 @@
           <!--Any flash messages pop up in any page because this is the base template-->
           <div class="text-center">
             {% if messages %}
-            <div class="alert" role="alert">
+            <div class="alert" role="alert" id="alert-box">
               {% for message in messages %}
               <div class="custom-alert alert alert-{{ message.tags }}" role="alert">
                 <span class="alert-content">{{ message }}</span>
@@ -60,7 +60,7 @@
         <div class="footer">{% include 'includes/footer.html' %}</div>
       </div>
     </div>
-
+    
     <!-- JS link -->
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
     <script src="{% static 'theme-toggle.js' %}"></script>

@@ -34,11 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateThemeIcon(theme) {
     const themeIcon = document.querySelector('#theme-toggle i');
     if (theme === 'white-theme') {
-      themeIcon.classList.remove('ri-moon-fill');
+      themeIcon.classList.remove('ri-sun-fill');
       themeIcon.classList.add('ri-sun-line');
     } else {
       themeIcon.classList.remove('ri-sun-line');
-      themeIcon.classList.add('ri-moon-fill');
+      themeIcon.classList.add('ri-sun-fill');
     }
   }
   
+// Get the alert box element
+const alertBox = document.getElementById('alert-box');
+
+// Get the close button element
+const closeButton = alertBox.querySelector('.close');
+
+// Remove the margin when the alert is closed
+closeButton.addEventListener('click', () => {
+alertBox.style.display = 'none';
+});

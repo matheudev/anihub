@@ -17,4 +17,5 @@ urlpatterns = [
     path('anime/season/', views.seasonal, name='season'),
     path('anime/season/<int:page>/', views.seasonal, name='season_page'),
     path('search/anime', views.anime_search, name='anime_search'),
+    path('importlist/', views.import_anime_list, name='importlist'),
 ]

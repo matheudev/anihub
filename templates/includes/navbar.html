@@ -38,10 +38,11 @@
 
     <div class="main">
         <button id="theme-toggle">
-            <i class="ri-sun-fill"></i>
+            <i class="ri-sun-line"></i>
         </button>
         {% if user.is_authenticated %}
         <a href="{% url 'profile' %}" class="{% if url_name == 'profile' %}active-link{% endif %} profile">Profile</a>
+        <a href="{% url 'importlist' %}" class="{% if url_name == 'importlist' %}active-link{% endif %} importlist">Import List</a>
         <a href="{% url 'logout' %}" class="{% if url_name == 'logout' %}active-link{% endif %} logout">Logout<i class="ri-logout-box-line"></i></a>
         {% else %}
         <a href="{% url 'login' %}" class="{% if url_name == 'login' %}active-link{% endif %} user"><i class="ri-user-fill"></i>Sign In</a>
