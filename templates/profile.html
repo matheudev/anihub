@@ -1,13 +1,5 @@
 {% extends "layout.html" %} {% block title %}Profile Page{% endblock title %} {% block content %}
 
-<style> 
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-</style>
-
 <div class="container">
   <div class="row my-3 p-3">
     <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer" />
