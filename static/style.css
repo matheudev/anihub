@@ -302,7 +302,7 @@ footer.realnavbar {
     }
 }
 
-.search-form{
+.searchnav{
     margin-left: auto;
 }
 
@@ -386,7 +386,7 @@ footer.realnavbar {
     .navbar a.active {
       color: var(--main-color);
     }
-    .search-form {
+    .searchnav {
         position: absolute;
         top: 60px;
         left: 10px;
@@ -403,10 +403,10 @@ footer.realnavbar {
         margin-top: 10px;
         margin-left: auto;
       }
-    .search-form.open {
+    .searchnav.open {
         display: flex;
       }
-    .search-form a {
+    .searchnav a {
         margin: 12px 0;
         padding: 10px 25px;
         font-size: 1.2rem;
@@ -414,10 +414,10 @@ footer.realnavbar {
         color: var(--text-color);
         transition: all .50s ease;
       }
-    .search-form a:hover {
+    .searchnav a:hover {
         color: var(--main-color);
       }
-    .search-form a.active {
+    .searchnav a.active {
         color: var(--main-color);
       }
   }
@@ -486,10 +486,22 @@ footer.realnavbar {
     justify-content: start;
   }
 
-@media (max-width: 1199px) {
+.search-head {
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+@media (max-width: 1199.9px) {
     .l-cards {
         margin-left: -20px;
         justify-content: center;
+    }
+    .search-head {
+        margin-left: 65px;
+    }
+    .animetrailer iframe {
+        width: 600px;
+        height: 337px;
     }
 }
 .searchCardGrid {
@@ -645,11 +657,6 @@ footer.realnavbar {
     margin-top: 30px;
   }
 
-
-.search-head {
-    margin-bottom: 30px;
-}
-
 .dropdown {
     margin-top: 10px;
     display: flex;
@@ -672,6 +679,13 @@ footer.realnavbar {
     .statusDisplay {
         margin-left: 0;
         text-align: center;
+    }
+    .search-head {
+        margin-left: 45px;
+    }
+    .animetrailer iframe {
+        width: 358px;
+        height: 201px;
     }
 }
 
@@ -778,7 +792,7 @@ footer.realnavbar {
 }
 
 .list-separator {
-    width: 102%;
+    width: 100%;
     border: none;
     border-top: 1px solid var(--listseparator-border);
 }
@@ -1071,6 +1085,10 @@ body {
     margin-right: 6px;
 }
 
+.animesynopsis {
+    max-width: 780px;
+}
+
 /* Add this media query for smaller devices */
 @media (max-width: 767px) {
 
@@ -1095,8 +1113,119 @@ body {
         flex-wrap: wrap;
         justify-content: center;
       }
-
 }
+@media (max-width: 767.9px) {
+    .search-head {
+        margin-left: 60px;
+    }
+    .anime-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .animetrailer iframe {
+        width: 510px;
+        height: 287px;
+    }
+    .anime-details h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 575.9px) {
+    .search-head {
+        text-align: center;
+        margin-left: 0;
+    }
+    .anime-details {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .animetrailer iframe {
+        width: 510px;
+        height: 287px;
+    }
+}
+
+@media (max-width: 540.9px) {
+    .anime-details p {
+      word-break: break-all;
+      max-width: 450px;
+    }
+    .animetrailer iframe {
+        width: 450px;
+        height: 253px;
+    }
+  }
+
+@media (max-width: 479.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 417px;
+        height: 235px;
+    }
+    .animesynopsis {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 446.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 386px;
+        height: 217px;
+    }
+    .animesynopsis {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 415.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 348px;
+        height: 196px;
+    }
+}
+
+@media (max-width: 377.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 317px;
+        height: 178px;
+    }
+}
+
+@media (max-width: 346.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 280px;
+        height: 157px;
+    }
+}
+
+@media (max-width: 309.9px) {
+    .anime-details p {
+      word-break: break-all;
+    }
+    .animetrailer iframe {
+        width: 231px;
+        height: 130px;
+    }
+}
+
 
 @media (max-width: 1200px) {
 

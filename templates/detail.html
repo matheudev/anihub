@@ -37,8 +37,9 @@
         </div>
       {% endif %}
       {% endif %}
-
-      <p><strong>Type:</strong> {{ anime.type }}</p>
+      <p><strong>Title:</strong> {{ anime.title }}</p>
+      <p><strong>English Title:</strong> {{ anime.title_english }}</p>
+      <p><strong>Japanese Title:</strong> {{ anime.title_japanese }}</p>
       <p><strong>Episodes:</strong> {{ anime.episodes }}</p>
       <p><strong>Status:</strong> {{ anime.status }}</p>
       <p><strong>Genres:</strong> {% for genre in anime.genres %} {{ genre.name }}{% if not forloop.last %}, {% endif %} {% endfor %}</p>
@@ -49,10 +50,10 @@
     </div>
     <div class="anime-details">
       <h2>{{ anime.title }}</h2>
-      <p style="text-align: justify;">{{ anime.synopsis }}</p>
+      <p class="animesynopsis" style="text-align: justify;">{{ anime.synopsis }}</p>
       {% if anime.trailer.embed_url %}
-        <div>
-            <iframe width="800" height="450" 
+        <div class="animetrailer">
+            <iframe width="780" height="439" 
             src="{{ anime.trailer.embed_url }}" title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             allowfullscreen></iframe>

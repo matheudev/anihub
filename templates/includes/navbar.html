@@ -10,7 +10,7 @@
         <div class="navbar">
             <li><a href="/" class="{% if url_name == 'index' %}active{% endif %}">Home</a></li>
             <li class="dropdown-navbar">
-                <a href="{% url 'anime_search' %}" class="dropdown-toggle {% if url_name == 'topanime' or url_name == 'anime_search' or url_name == 'season' or url_name == 'detail'%}active{% endif %}">Anime</a>
+                <a href="#" class="dropdown-toggle {% if url_name == 'topanime' or url_name == 'anime_search' or url_name == 'season' or url_name == 'detail'%}active{% endif %}">Anime</a>
                 <div class="dropdown-content">
                 <a href="{% url 'anime_search' %}">Anime Search</a>
                 <a href="{% url 'topanime' %}">Top Anime</a>
@@ -24,7 +24,7 @@
         <div class="logoh" id="logosmall">
             <a href="/" class="logo"><span><span style="color: #6e93f7">Ani</span>Hub</span></a>
         </div>
-        <div class="search-form">
+        <div class="search-form searchnav" id="search-form">
             <form id="search-form" method="get" action="{% url 'search' %}">
               <div class="search-box">
                 <input type="text" name="query" class="search-text dark-mode" placeholder="Search anime" autocomplete="off">

@@ -3,7 +3,7 @@ let menuright = document.querySelector('#menu-icon.menuright');
 let search = document.querySelector('#menu-icon.search');
 let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
-let searchform = document.querySelector('.search-form');
+let searchform = document.querySelector('#search-form');
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
