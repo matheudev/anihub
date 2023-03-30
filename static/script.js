@@ -1,6 +1,6 @@
 let menuleft = document.querySelector('#menu-icon.menuleft');
 let menuright = document.querySelector('#menu-icon.menuright');
-let search = document.querySelector('#menu-icon.search');
+let search = document.querySelector('#menu-icon-search.search');
 let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
