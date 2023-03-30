@@ -689,9 +689,7 @@ footer.realnavbar {
     }
 }
 
-.importlist-form {
-    margin: 0 300px;
-}
+
 
 .filter-dropdown {
     margin-bottom: 20px;
@@ -1375,6 +1373,10 @@ input[type="radio"] {
 @media (max-width: 767.9px) {
     .comment-form form {
         width: 510px;
+    }
+    .xmlfile {
+        display: flex;
+        flex-direction: column;
     }
 }
 @media (max-width: 540.9px) {
