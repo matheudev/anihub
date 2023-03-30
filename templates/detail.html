@@ -67,7 +67,7 @@
     <form method="post" action="{% url 'submit_comment' anime_id=anime.mal_id %}">
       {% csrf_token %}
       <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
-      <textarea id="comment-textarea" class="form-control" name="comment" rows="1" placeholder="Add a public comment..." required></textarea>
+      <textarea id="comment-textarea" class="form-control" name="comment" rows="1" placeholder="Add a comment" required></textarea>
       <button type="submit">Comment</button>
     </form>
   </div>

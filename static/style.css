@@ -1361,3 +1361,49 @@ input[type="radio"] {
 .animei {
     color: var(m)
 }
+
+@media (max-width: 1199.9px) {
+    .comment-form form {
+        width: 930px;
+    }
+}
+@media (max-width: 991.9px) {
+    .comment-form form {
+        width: 690px;
+    }
+}
+@media (max-width: 767.9px) {
+    .comment-form form {
+        width: 510px;
+    }
+}
+@media (max-width: 540.9px) {
+    .comment-form form {
+        width: 494px;
+    }
+}
+@media (max-width: 520.9px) {
+    .comment-form form {
+        width: 400px;
+    }
+}
+@media (max-width: 430.9px) {
+    .comment-form form {
+        width: 381px;
+    }
+}
+@media (max-width: 410.9px) {
+    .comment-form form {
+        width: 350px;
+    }
+}
+@media (max-width: 377.9px) {
+    .comment-form form {
+        width: 300px;
+    }
+}
+@media (max-width: 314.9px) {
+    .comment-form form {
+        width: 250px;
+    }
+}
