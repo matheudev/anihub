@@ -51,10 +51,6 @@ body{
     color: var(--text-color);
 }
 
-.body {
-    flex-grow: 1;
-}
-
 .white-theme {
     --bg-color: #ffffff;
     --text-color: #222222;
@@ -1314,11 +1310,10 @@ input[type="radio"] {
 }
 
 .footer {
-    position: relative;
     background-color: var(--header-color);
-    margin-top: auto;
+    /*height: 215.59px;*/
   }
-
+  
 .footer .row {
     padding-top: 1.3rem;
     margin-bottom: -2.7rem;
@@ -1333,7 +1328,8 @@ input[type="radio"] {
   }
 
 .wrapper {
-    min-height: calc(100vh - 216px);
+    flex-grow: 1;
+    /*min-height: calc(100vh - 216px);*/
 }
 
 .custom-alert {

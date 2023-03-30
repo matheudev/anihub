@@ -35,31 +35,28 @@
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
-    <div class="body">
-      <div>
-        <div class="wrapper">
-          {% include 'includes/navbar.html' %}
-          <!--Any flash messages pop up in any page because this is the base template-->
-          <div class="text-center">
-            {% if messages %}
-            <div class="alert" role="alert" id="alert-box">
-              {% for message in messages %}
-              <div class="custom-alert alert alert-{{ message.tags }}" role="alert">
-                <span class="alert-content">{{ message }}</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              {% endfor %}
-            {% endif %} 
-            <div class="clearfix">
+      {% include 'includes/navbar.html' %}
+      <div class="wrapper">
+        <!--Any flash messages pop up in any page because this is the base template-->
+        <div class="text-center">
+          {% if messages %}
+          <div class="alert" role="alert" id="alert-box">
+            {% for message in messages %}
+            <div class="custom-alert alert alert-{{ message.tags }}" role="alert">
+              <span class="alert-content">{{ message }}</span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            {% endfor %}
+          {% endif %} 
+          <div class="clearfix">
           </div>
-          {% block content %}{% endblock %}
         </div>
-        <div class="footer">{% include 'includes/footer.html' %}</div>
+        {% block content %}{% endblock %}
+        <div class="push"></div>
       </div>
-    </div>
+      <div class="footer">{% include 'includes/footer.html' %}</div>
     
     <!-- JS link -->
     <script type="text/javascript" src="{% static 'script.js' %}"></script>
