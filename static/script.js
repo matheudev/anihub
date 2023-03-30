@@ -5,17 +5,16 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 
-const searchInput = document.querySelector('#realnavbar .search-text');
-searchInput.addEventListener('focus', () => {
-    if (window.innerWidth < 1170) {
-        document.body.style.position = 'fixed';
+search.onclick = () => {
+    search.classList.toggle('bx-x');
+    searchform.classList.toggle('open');
+    document.body.classList.toggle('body-fixed'); // Add or remove the 'body-fixed' class
+    if (searchform.classList.contains('open')) {
+        searchform.style.display = 'flex';
+    } else {
+        searchform.style.display = 'none';
     }
-});
-searchInput.addEventListener('blur', () => {
-    if (window.innerWidth < 1170) {
-        document.body.style.position = '';
-    }
-});
+};
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
