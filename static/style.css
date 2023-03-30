@@ -219,7 +219,7 @@ footer.realnavbar {
     text-decoration: none;
 }
 
-#menu-icon, #menu-icon-search {
+#menu-icon {
     font-size: 35px;
     color: var(--text-color);
     cursor: pointer;
@@ -330,7 +330,7 @@ footer.realnavbar {
         position: absolute;
         left: 10px;
     }
-    #menu-icon-search.search {
+    #menu-icon.search {
         display: block;
         position: absolute;
         left: 50px;
