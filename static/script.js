@@ -5,6 +5,7 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 let inputFocused = false;
+let touchDevice = false;
 
 const searchInput = document.querySelector('#realnavbar .search-text');
 searchInput.addEventListener('focus', () => {
@@ -80,13 +81,19 @@ window.addEventListener('resize', () => {
     }
 });
 
+window.addEventListener('touchstart', () => {
+    touchDevice = true;
+});
+
 window.addEventListener('click', (event) => {
     // If the clicked element is not within the searchform or menu button
     if (window.innerWidth < 1170) {
         if (!searchform.contains(event.target) && event.target !== search && !inputFocused) {
-            searchform.classList.remove('open');
-            searchform.style.display = 'none';
-            search.classList.remove('bx-x');
+            if (!touchDevice || (touchDevice && !searchInput.contains(event.target))) {
+                searchform.classList.remove('open');
+                searchform.style.display = 'none';
+                search.classList.remove('bx-x');
+            }
         }
     }
 });
