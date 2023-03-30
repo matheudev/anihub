@@ -5,6 +5,15 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 
+let searchInput = document.querySelector('.search-text');
+searchInput.addEventListener('click', (event) => {
+    event.stopPropagation();
+});
+
+searchInput.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
+});
+
 search.onclick = () => {
     search.classList.toggle('bx-x');
     searchform.classList.toggle('open');
