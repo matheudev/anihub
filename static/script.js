@@ -36,6 +36,10 @@ menuright.onclick = () => {
 }
 
 window.addEventListener('click', (event) => {
+    if (event.target.closest('#search-form') || event.target.closest('.search')) {
+        return;
+    }
+
     // If the clicked element is not within the main or menu button
     if (!main.contains(event.target) && event.target !== menuright) {
         main.classList.remove('open');
@@ -63,15 +67,20 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('click', (event) => {
-  // If the clicked element is not within the navbar or menu button
-  if (window.innerWidth < 1170) {
-    if (!navbar.contains(event.target) && event.target !== menuleft) {
-        navbar.classList.remove('open');
-        navbar.style.display = 'none';
-        menuleft.classList.remove('bx-x');
-      }
-  }
+    if (event.target.closest('#search-form') || event.target.closest('.search')) {
+        return;
+    }
+
+    // If the clicked element is not within the navbar or menu button
+    if (window.innerWidth < 1170) {
+        if (!navbar.contains(event.target) && event.target !== menuleft) {
+            navbar.classList.remove('open');
+            navbar.style.display = 'none';
+            menuleft.classList.remove('bx-x');
+        }
+    }
 });
+
 
 search.onclick = () => {
     search.classList.toggle('bx-x');
