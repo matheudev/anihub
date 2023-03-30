@@ -4,6 +4,15 @@ let search = document.querySelector('#menu-icon.search');
 let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
+let inputFocused = false;
+
+const searchInput = document.querySelector('#realnavbar .search-text');
+searchInput.addEventListener('focus', () => {
+    inputFocused = true;
+});
+searchInput.addEventListener('blur', () => {
+    inputFocused = false;
+});
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
@@ -74,7 +83,7 @@ window.addEventListener('resize', () => {
 window.addEventListener('click', (event) => {
     // If the clicked element is not within the searchform or menu button
     if (window.innerWidth < 1170) {
-        if (!searchform.contains(event.target) && event.target !== search) {
+        if (!searchform.contains(event.target) && event.target !== search && !inputFocused) {
             searchform.classList.remove('open');
             searchform.style.display = 'none';
             search.classList.remove('bx-x');
