@@ -4,16 +4,7 @@ let search = document.querySelector('#menu-icon.search');
 let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
-let inputFocused = false;
 let touchDevice = false;
-
-const searchInput = document.querySelector('#realnavbar .search-text');
-searchInput.addEventListener('focus', () => {
-    inputFocused = true;
-});
-searchInput.addEventListener('blur', () => {
-    inputFocused = false;
-});
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
@@ -88,7 +79,7 @@ window.addEventListener('touchstart', () => {
 window.addEventListener('click', (event) => {
     // If the clicked element is not within the searchform or menu button
     if (window.innerWidth < 1170) {
-        if (!searchform.contains(event.target) && event.target !== search && !inputFocused) {
+        if (!searchform.contains(event.target) && event.target !== search && event.target !== searchInput) {
             if (!touchDevice || (touchDevice && !searchInput.contains(event.target))) {
                 searchform.classList.remove('open');
                 searchform.style.display = 'none';
