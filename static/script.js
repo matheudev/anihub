@@ -5,6 +5,18 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 
+const searchInput = document.querySelector('#realnavbar .search-text');
+searchInput.addEventListener('focus', () => {
+    if (window.innerWidth < 1170) {
+        document.body.style.position = 'fixed';
+    }
+});
+searchInput.addEventListener('blur', () => {
+    if (window.innerWidth < 1170) {
+        document.body.style.position = '';
+    }
+});
+
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
     main.classList.toggle('open');
