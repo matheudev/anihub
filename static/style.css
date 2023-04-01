@@ -1122,6 +1122,9 @@ body {
     .anime-details h2 {
         text-align: center;
     }
+    .anime-image {
+        margin-left: 20.55px;
+    }
 }
 
 @media (max-width: 575.9px) {
