@@ -27,7 +27,9 @@
         <div class="search-form searchnav" id="search-form">
             <form id="search-form" method="get" action="{% url 'search' %}">
               <div class="search-box">
-                <input type="text" name="query" class="search-text dark-mode" placeholder="Search anime" autocomplete="off">
+                <div class="search-input-wrapper">
+                    <input type="text" name="query" class="search-text dark-mode" placeholder="Search anime" autocomplete="off">
+                </div>
                 <button type="submit" class="search-btn">
                   <i class="ri-search-line"></i>
                 </button>

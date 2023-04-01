@@ -418,6 +418,15 @@ footer.realnavbar {
       }
   }
 
+.search-input-wrapper {
+    pointer-events: none;
+}
+
+.search-input-wrapper .search-text {
+    pointer-events: auto;
+}
+
+
 .l-cards a {
     text-decoration: none;
     outline: none;
