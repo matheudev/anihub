@@ -14,25 +14,34 @@ searchInput.addEventListener('touchstart', (event) => {
     event.stopPropagation();
 });
 
-function hasSearchRelatedAttribute(element) {
-    while (element) {
-        if (element.getAttribute && element.getAttribute('data-search-related')) {
-            return true;
-        }
-        element = element.parentElement;
+search.onclick = () => {
+    search.classList.toggle('bx-x');
+    searchform.classList.toggle('open');
+    if (searchform.classList.contains('open')) {
+        searchform.style.display = 'flex';
+        document.querySelector('.search-text').setAttribute('data-search-focused', 'true');
+    } else {
+        searchform.style.display = 'none';
+        document.querySelector('.search-text').removeAttribute('data-search-focused');
     }
-    return false;
-}
+};
+
+document.querySelector('.search-text').addEventListener('focus', () => {
+    document.querySelector('.search-text').setAttribute('data-search-focused', 'true');
+});
+
+document.querySelector('.search-text').addEventListener('blur', () => {
+    document.querySelector('.search-text').removeAttribute('data-search-focused');
+});
 
 
 window.addEventListener('click', (event) => {
-    if (!hasSearchRelatedAttribute(event.target)) {
+    if (!event.target.getAttribute('data-search-focused')) {
         searchform.classList.remove('open');
         searchform.style.display = 'none';
         search.classList.remove('bx-x');
     }
 });
-
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
