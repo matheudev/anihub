@@ -21,7 +21,8 @@ def index(request):
     # Top 6 popular anime
     top_anime = cache.get('top_anime_data_index')
     if top_anime is None:
-        url = 'https://api.jikan.moe/v4/top/anime?page=1&limit=10'
+        params = {'limit': 10, 'order_by': 'members', 'sort': 'desc'}
+        url = f'https://api.jikan.moe/v4/anime?' + urlencode(params, doseq=True)
         response = requests.get(url)
         top_results = response.json()
         top_anime = top_results['data']
