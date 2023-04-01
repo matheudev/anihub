@@ -14,6 +14,26 @@ searchInput.addEventListener('touchstart', (event) => {
     event.stopPropagation();
 });
 
+function hasSearchRelatedAttribute(element) {
+    while (element) {
+        if (element.getAttribute && element.getAttribute('data-search-related')) {
+            return true;
+        }
+        element = element.parentElement;
+    }
+    return false;
+}
+
+
+window.addEventListener('click', (event) => {
+    if (!hasSearchRelatedAttribute(event.target)) {
+        searchform.classList.remove('open');
+        searchform.style.display = 'none';
+        search.classList.remove('bx-x');
+    }
+});
+
+
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
     main.classList.toggle('open');
