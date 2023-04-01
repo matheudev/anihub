@@ -383,6 +383,9 @@ footer.realnavbar {
       color: var(--main-color);
     }
     .searchnav {
+        position: absolute;
+        top: 60px;
+        left: 10px;
         width: 100%;
         max-width: 270px;
         height: auto;

@@ -5,26 +5,6 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 
-let searchInput = document.querySelector('.search-text');
-searchInput.addEventListener('click', (event) => {
-    event.stopPropagation();
-});
-
-searchInput.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
-});
-
-search.onclick = () => {
-    search.classList.toggle('bx-x');
-    searchform.classList.toggle('open');
-    document.body.classList.toggle('body-fixed'); // Add or remove the 'body-fixed' class
-    if (searchform.classList.contains('open')) {
-        searchform.style.display = 'flex';
-    } else {
-        searchform.style.display = 'none';
-    }
-};
-
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
     main.classList.toggle('open');
@@ -36,10 +16,6 @@ menuright.onclick = () => {
 }
 
 window.addEventListener('click', (event) => {
-    if (event.target.closest('#search-form') || event.target.closest('.search')) {
-        return;
-    }
-
     // If the clicked element is not within the main or menu button
     if (!main.contains(event.target) && event.target !== menuright) {
         main.classList.remove('open');
@@ -67,10 +43,6 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('click', (event) => {
-    if (event.target.closest('#search-form') || event.target.closest('.search')) {
-        return;
-    }
-
     // If the clicked element is not within the navbar or menu button
     if (window.innerWidth < 1170) {
         if (!navbar.contains(event.target) && event.target !== menuleft) {
