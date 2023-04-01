@@ -7,6 +7,7 @@ let searchform = document.querySelector('.searchnav');
 let searchInput = document.querySelector('.search-text');
 
 search.onclick = () => {
+    search.classList.toggle('bx-x');
     if (searchform.style.display === 'none' || searchform.style.display === '') {
         searchform.style.display = 'flex';
     } else {
