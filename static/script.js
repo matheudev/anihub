@@ -3,29 +3,16 @@ let menuright = document.querySelector('#menu-icon.menuright');
 let search = document.querySelector('#menu-icon.search');
 let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
-let searchform = document.querySelector('#search-form');
+let searchform = document.querySelector('.searchnav');
 let searchInput = document.querySelector('.search-text');
-const newSearchIcon = document.getElementById('new-search-icon');
-const newSearchForm = document.getElementById('new-search-form');
-const newSearchText = document.querySelector('.new-search-text');
 
-newSearchIcon.addEventListener('click', (event) => {
-    event.stopPropagation();
-    newSearchForm.style.display = newSearchForm.style.display === 'none' ? 'block' : 'none';
-});
-
-window.addEventListener('click', (event) => {
-    if (!newSearchForm.contains(event.target) && event.target !== newSearchIcon) {
-        newSearchForm.style.display = 'none';
+search.onclick = () => {
+    if (searchform.style.display === 'none' || searchform.style.display === '') {
+        searchform.style.display = 'flex';
+    } else {
+        searchform.style.display = 'none';
     }
-});
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 1170) {
-        newSearchForm.style.display = 'none';
-    }
-});
-
+};
 
 menuright.onclick = () => {
     menuright.classList.toggle('bx-x');
