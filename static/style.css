@@ -1404,3 +1404,21 @@ input[type="radio"] {
         width: 250px;
     }
 }
+
+/* Add this at the bottom of your existing CSS */
+@media (max-width: 767px) {
+    .search-form .search-box {
+      position: relative;
+    }
+    
+    .search-form .search-input-wrapper {
+      width: 100%;
+    }
+  
+    .search-form .search-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  
