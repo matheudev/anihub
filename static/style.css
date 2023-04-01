@@ -536,7 +536,6 @@ footer.realnavbar {
 }
 
 .container {
-    margin-top: 20px;
     margin-bottom: 50px;
 }
 
@@ -1142,7 +1141,6 @@ body {
 
 @media (max-width: 540.9px) {
     .anime-details p {
-      word-break: break-all;
       max-width: 450px;
     }
     .animetrailer iframe {
@@ -1152,9 +1150,6 @@ body {
   }
 
 @media (max-width: 479.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 417px;
         height: 235px;
@@ -1166,9 +1161,6 @@ body {
 }
 
 @media (max-width: 446.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 386px;
         height: 217px;
@@ -1180,9 +1172,6 @@ body {
 }
 
 @media (max-width: 415.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 348px;
         height: 196px;
@@ -1190,9 +1179,6 @@ body {
 }
 
 @media (max-width: 377.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 317px;
         height: 178px;
@@ -1200,9 +1186,6 @@ body {
 }
 
 @media (max-width: 346.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 280px;
         height: 157px;
@@ -1210,9 +1193,6 @@ body {
 }
 
 @media (max-width: 309.9px) {
-    .anime-details p {
-      word-break: break-all;
-    }
     .animetrailer iframe {
         width: 231px;
         height: 130px;
@@ -1281,9 +1261,12 @@ input[type="radio"] {
     font-size: 30px;
     font-weight: 600;
     color: var(--text-color);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     text-align: center;
-    margin: 50px 0;
+}
+
+.seasontitle {
+    margin-top: 30px;
 }
 
 .row.my-3.p-3 {
