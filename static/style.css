@@ -280,6 +280,13 @@ footer.realnavbar {
     margin-right: 10px;
 }
 
+.searchnav2 {
+    display: none;
+}
+.new-search-icon{
+    display: none;
+}
+
 .main #theme-toggle {
     margin-left: 40px;
 }
@@ -390,7 +397,6 @@ footer.realnavbar {
         max-width: 270px;
         height: auto;
         background-color: transparent;
-        display: none;
         flex-direction: column;
         justify-content: flex-start;
         border-radius: 10px;
@@ -418,14 +424,33 @@ footer.realnavbar {
       }
   }
 
-.search-input-wrapper {
-    pointer-events: none;
+.new-search-form {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background: #333;
+    padding: 10px;
+    z-index: 5;
 }
 
-.search-input-wrapper .search-text {
-    pointer-events: auto;
+.new-search-text {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    outline: none;
+    background: #fff;
+    color: #333;
 }
 
+@media (max-width: 1170px) {
+    .new-search-form {
+        width: calc(100% - 20px);
+        margin: 0 10px;
+    }
+}
 
 .l-cards a {
     text-decoration: none;

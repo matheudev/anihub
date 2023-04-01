@@ -5,39 +5,24 @@ let navbar = document.querySelector('.navbar');
 let main = document.querySelector('.main');
 let searchform = document.querySelector('#search-form');
 let searchInput = document.querySelector('.search-text');
+const newSearchIcon = document.getElementById('new-search-icon');
+const newSearchForm = document.getElementById('new-search-form');
+const newSearchText = document.querySelector('.new-search-text');
 
-searchInput.addEventListener('click', (event) => {
+newSearchIcon.addEventListener('click', (event) => {
     event.stopPropagation();
-});
-
-searchInput.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
-});
-
-search.addEventListener('click', (event) => {
-    event.stopPropagation();
-    search.classList.toggle('bx-x');
-    searchform.classList.toggle('open');
-    if (searchform.classList.contains('open')) {
-        searchform.style.display = 'flex';
-    } else {
-        searchform.style.display = 'none';
-    }
-});
-
-document.querySelector('.search-text').addEventListener('focus', () => {
-    document.querySelector('.search-text').setAttribute('data-search-focused', 'true');
-});
-
-document.querySelector('.search-text').addEventListener('blur', () => {
-    document.querySelector('.search-text').removeAttribute('data-search-focused');
+    newSearchForm.style.display = newSearchForm.style.display === 'none' ? 'block' : 'none';
 });
 
 window.addEventListener('click', (event) => {
-    if (!searchform.contains(event.target) && event.target !== search) {
-        searchform.classList.remove('open');
-        searchform.style.display = 'none';
-        search.classList.remove('bx-x');
+    if (!newSearchForm.contains(event.target) && event.target !== newSearchIcon) {
+        newSearchForm.style.display = 'none';
+    }
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1170) {
+        newSearchForm.style.display = 'none';
     }
 });
 
@@ -87,14 +72,6 @@ window.addEventListener('click', (event) => {
             navbar.style.display = 'none';
             menuleft.classList.remove('bx-x');
         }
-    }
-});
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 1170) {
-        searchform.style.display = 'flex';
-    } else {
-        searchform.style.display = 'none';
     }
 });
 

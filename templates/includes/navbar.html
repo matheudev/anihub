@@ -1,6 +1,8 @@
 <header id="realnavbar">
     <div class="bx bx-menu menuleft" id="menu-icon"></div>
-    <div class="bx bx-search search" id="menu-icon"></div>
+    <div id="new-search-icon" class="menu-icon search">
+        <i class="bx bx-search"></i>
+    </div>
     <div class="logoh" id="logolarge">
     <a href="/" class="logo"><span><span style="color: #6e93f7">Ani</span>Hub</span></a>
     </div>
@@ -29,6 +31,21 @@
               <div class="search-box">
                 <div class="search-input-wrapper">
                     <input type="text" name="query" class="search-text dark-mode" placeholder="Search anime" autocomplete="off">
+                </div>
+                <div id="new-search-form" class="new-search-form">
+                    <input type="text" name="query" class="new-search-text" placeholder="Search anime" autocomplete="off">
+                </div>
+                <button type="submit" class="search-btn">
+                  <i class="ri-search-line"></i>
+                </button>
+              </div>
+            </form>
+        </div>   
+        <div class="search-form searchnav2" id="search-form">
+            <form id="search-form" method="get" action="{% url 'search' %}">
+              <div class="search-box">
+                <div id="new-search-form" class="new-search-form">
+                    <input type="text" name="query" class="new-search-text" placeholder="Search anime" autocomplete="off">
                 </div>
                 <button type="submit" class="search-btn">
                   <i class="ri-search-line"></i>
