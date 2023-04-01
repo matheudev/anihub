@@ -1417,8 +1417,8 @@ input[type="radio"] {
   
     .search-form .search-btn {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 8px;
+      top: 20px;
     }
   }
   
