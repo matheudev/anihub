@@ -1123,7 +1123,9 @@ body {
         text-align: center;
     }
     .anime-image {
-        margin-left: 20.55px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
