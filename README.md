@@ -9,8 +9,8 @@ AniHub is a full-stack web application created for the Final Project of CS50's W
 - **Anime Search**: Users can search for anime using filters such as query, genres, type, and airing status.
 - **Top-Rated Anime**: Users can view a list of top-rated anime.
 - **Seasonal Anime**: Users can explore seasonal anime with year and season filters.
-- **Customizable Anime Lists**: Users can add anime to categories such as Watching, Completed, Dropped, and Plan to Watch.
-- **Anime List Import**: Users can import their anime lists from other websites like MyAnimeList using an XML file.
+- **Anime Lists**: Users can add anime to categories such as Watching, Completed, Dropped, and Plan to Watch.
+- **Import Lists**: Users can import their anime lists from other websites like MyAnimeList using an XML file.
 
 ## Technologies
 
