@@ -1,32 +1,62 @@
-# AniHub
-
+AniHub
+======
 AniHub is a full-stack web application created for the Final Project of CS50's Web Programming with Python and JavaScript course. The application serves as an anime tracking and discovery platform, allowing users to manage their personalized anime lists, search for anime, and explore top-rated and seasonal anime.
 
-## Features
+Distinctiveness and Complexity
+-------------------------------
+AniHub is a unique and complex project that stands out from the projects featured in the course. While it shares some similarities with Project 4 (Network), it is distinct in its focus on anime discovery and tracking, rather than being a generic social network. AniHub provides a personalized experience for anime fans, allowing them to easily manage their anime lists and discover new anime based on their interests.
 
-- **User Authentication**: Users can register, login, and add a profile picture.
-- **Theme Toggle**: Users can switch between light and dark themes.
-- **Anime Search**: Users can search for anime using filters such as query, genres, type, and airing status.
-- **Top-Rated Anime**: Users can view a list of top-rated anime.
-- **Seasonal Anime**: Users can explore seasonal anime with year and season filters.
-- **Anime Lists**: Users can add anime to categories such as Watching, Completed, Dropped, and Plan to Watch.
-- **Import Lists**: Users can import their anime lists from other websites like MyAnimeList using an XML file.
+AniHub goes beyond the complexity of the course projects by incorporating several advanced features such as importing anime lists from other websites, utilizing multiple APIs, and implementing a theme toggle system. Moreover, AniHub's frontend is mobile-responsive, ensuring a seamless user experience on various devices.
 
-## Technologies
+Features
+--------
+- **User Authentication:** Users can register, login, and add a profile picture.
+- **Theme Toggle:** Users can switch between light and dark themes.
+- **Anime Search:** Users can search for anime using filters such as query, genres, type, and airing status.
+- **Top-Rated Anime:** Users can view a list of top-rated anime.
+- **Seasonal Anime:** Users can explore seasonal anime with year and season filters.
+- **Anime Lists:** Users can add anime to categories such as Watching, Completed, Dropped, and Plan to Watch.
+- **Import Lists:** Users can import their anime lists from other websites like MyAnimeList using an XML file.
 
-- **Backend**: Django
-- **Frontend**: HTML, CSS, and JavaScript
-- **Database**: PostgreSQL
+Technologies
+------------
+- **Backend:** Django
+- **Frontend:** HTML, CSS, and JavaScript
+- **Database:** PostgreSQL
 
-## APIs and Data Sources
+APIs and Data Sources
+---------------------
+- **JikanAPI** for fetching anime data
+- **Manami Project** for the anime database used in creating anime lists, due to request limitations in Jikan API
 
-- [JikanAPI](https://jikan.moe/) for fetching anime data
-- [Manami Project](https://github.com/manami-project/anime-offline-database) for the anime database used in creating anime lists, due to request limitations in Jikan API
+Deployment
+----------
+The application was deployed using Digital Ocean with Gunicorn and Nginx as the web server and reverse proxy. It is live and available 24/7 at AniHub.net.
 
-## Deployment
+File Structure
+--------------
+- `anime/`: Django app for anime search, lists, and data management.
+- `animelist/`: Main Django project folder with settings.py.
+- `media/`: Folder for storing user-uploaded images.
+- `static/`: Folder containing all static files, such as CSS, JavaScript, and images.
+- `templates/`: Folder containing all the HTML templates.
+- `users/`: Django app for authentication and profile management.
+- `favicon.ico`: Favicon for the website.
+- `manage.py`: Main management script for Django.
+- `README.md`: Documentation of the project.
+- `requirements.txt`: List of Python packages needed to run the application.
 
-The application was deployed using Digital Ocean with Gunicorn and Nginx as the web server and reverse proxy. It is live and available 24/7 at [AniHub.net](https://www.anihub.net/).
+How to Run
+----------
+1. Install the required packages using `pip install -r requirements.txt`.
+2. Run `python manage.py makemigrations` and `python manage.py migrate` to set up the database.
+3. Run `python manage.py runserver` to start the development server.
+4. Access the application via your web browser at `http://127.0.0.1:8000/`.
 
-## Acknowledgements
-
+Acknowledgements
+----------------
 This project took a considerable amount of time and effort, but I am extremely proud of the final result. I would like to thank CS50's Web Programming with Python and JavaScript course for providing the knowledge and guidance necessary to create this project.
+
+Additional Information
+----------------------
+To import anime lists from other websites, users must first export their lists as an XML file from the respective website. Then
