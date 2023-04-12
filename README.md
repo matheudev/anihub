@@ -15,6 +15,8 @@ Features
 - **Anime Search:** Users can search for anime using filters such as query, genres, type, and airing status.
 - **Top-Rated Anime:** Users can view a list of top-rated anime.
 - **Seasonal Anime:** Users can explore seasonal anime with year and season filters.
+- **Anime Details Page:** Users can view detailed information about an anime, including title, episodes, synopsis, and more.
+- **Comments:** Users can leave comments on the anime details page to share their thoughts and opinions on the anime.
 - **Anime Lists:** Users can add anime to categories such as Watching, Completed, Dropped, and Plan to Watch.
 - **Import Lists:** Users can import their anime lists from other websites like MyAnimeList using an XML file.
 
