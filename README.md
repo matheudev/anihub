@@ -49,7 +49,7 @@ How to Run
 ----------
 1. Install PostgreSQL on your local machine if you haven't already. You can follow the instructions for your operating system here: [PostgreSQL installation](https://www.postgresql.org/download/)
 2. Create a PostgreSQL user and database for your project. You can do this using the `psql` command-line interface or a GUI tool like [pgAdmin](https://www.pgadmin.org/).
-3. Edit the `.env` file in your Django project's root directory (same level as `manage.py`), update the values for the PostgreSQL connection and email credentials. For email, follow this guide on [how to set up an App Password for Gmail](https://support.google.com/accounts/answer/185833).
+3. Update the `settings.py` file in the main Django project folder (animelist/) with the new credentials for the PostgreSQL connection and email settings. Replace the values with os.getenv calls. For email, follow this guide on [how to set up an App Password for Gmail](https://support.google.com/accounts/answer/185833).
 4. Install the required packages using `pip install -r requirements.txt`.
 5. Run `python manage.py makemigrations` and `python manage.py migrate` to set up the database.
 6. Run `python manage.py runserver` to start the development server.
