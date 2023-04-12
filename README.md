@@ -4,7 +4,7 @@ AniHub is a full-stack web application created for the Final Project of CS50's W
 
 Distinctiveness and Complexity
 -------------------------------
-AniHub is a unique and complex project that stands out from the projects featured in the course. While it shares some similarities with Project 4 (Network), it is distinct in its focus on anime discovery and tracking, rather than being a generic social network. AniHub provides a personalized experience for anime fans, allowing them to easily manage their anime lists and discover new anime based on their interests.
+AniHub is a unique and complex project that stands out from the projects featured in the course. AniHub provides a personalized experience for anime fans, allowing them to easily manage their anime lists and discover new anime based on their interests.
 
 AniHub goes beyond the complexity of the course projects by incorporating several advanced features such as importing anime lists from other websites, utilizing multiple APIs, and implementing a theme toggle system. Moreover, AniHub's frontend is mobile-responsive, ensuring a seamless user experience on various devices.
 
@@ -41,17 +41,20 @@ File Structure
 - `static/`: Folder containing all static files, such as CSS, JavaScript, and images.
 - `templates/`: Folder containing all the HTML templates.
 - `users/`: Django app for authentication and profile management.
-- `favicon.ico`: Favicon for the website.
 - `manage.py`: Main management script for Django.
 - `README.md`: Documentation of the project.
 - `requirements.txt`: List of Python packages needed to run the application.
 
 How to Run
 ----------
-1. Install the required packages using `pip install -r requirements.txt`.
-2. Run `python manage.py makemigrations` and `python manage.py migrate` to set up the database.
-3. Run `python manage.py runserver` to start the development server.
-4. Access the application via your web browser at `http://127.0.0.1:8000/`.
+1. Install PostgreSQL on your local machine if you haven't already. You can follow the instructions for your operating system here: [PostgreSQL installation](https://www.postgresql.org/download/)
+2. Create a PostgreSQL user and database for your project. You can do this using the `psql` command-line interface or a GUI tool like [pgAdmin](https://www.pgadmin.org/).
+3. Create a `.env` file in your Django project's root directory (same level as `manage.py`). Update the values for the PostgreSQL connection and email credentials. For email, follow this guide on [how to set up an App Password for Gmail](https://support.google.com/accounts/answer/185833).
+4. Install the required packages using `pip install -r requirements.txt`.
+5. Run `python manage.py makemigrations` and `python manage.py migrate` to set up the database.
+6. Run `python manage.py runserver` to start the development server.
+7. Access the application via your web browser at `http://127.0.0.1:8000/`.
+
 
 Acknowledgements
 ----------------
