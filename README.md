@@ -31,7 +31,7 @@ APIs and Data Sources
 
 Deployment
 ----------
-The application was deployed using Digital Ocean with Gunicorn and Nginx as the web server and reverse proxy. It is live and available 24/7 at AniHub.net.
+The application was deployed using Digital Ocean with Gunicorn and Nginx as the web server and reverse proxy. It is live and available 24/7 at [AniHub.net](https://www.anihub.net/).
 
 File Structure
 --------------
