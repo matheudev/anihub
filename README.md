@@ -62,4 +62,6 @@ This project took a considerable amount of time and effort, but I am extremely p
 
 Additional Information
 ----------------------
-To import anime lists from other websites, users must first export their lists as an XML file from the respective website. Then
+- To import anime lists from other websites, users must first export their lists as an XML file from the respective website. Then, they can use the "Import List" feature in AniHub to upload the XML file and update their AniHub anime lists accordingly.
+- AniHub utilizes the JikanAPI for fetching anime data and the Manami Project as an anime database for creating anime lists. Due to request limitations in the Jikan API, the Manami Project database is used to minimize the number of API requests made. This setup ensures that the application remains responsive and efficient even with a large number of users.
+
