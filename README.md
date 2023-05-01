@@ -55,7 +55,7 @@ How to Run
 4. Install the required packages using `pip install -r requirements.txt`.
 5. Run `python manage.py makemigrations` and `python manage.py migrate` to set up the database.
 6. Run `python manage.py runserver` to start the development server.
-7. Access the application via your web browser at `http://127.0.0.1:8000/`.
+7. Access the application via your web browser at `http://127.0.0.1:8000`.
 
 
 Acknowledgements
