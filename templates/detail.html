@@ -1,0 +1,318 @@
+{% extends "layout.html" %}
+
+{% load static %}
+{% block title %} {{ anime.title }} - Details {% endblock title%}
+
+{% block content %}
+
+<div class="container">
+  <div class="anime-info">
+    <div class="anime-image">
+      <img src="{{ anime.images.jpg.large_image_url }}" alt="{{ anime.title }}" />
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+      {% if user_anime %}
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user_anime.get_status_display }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {% for status, status_display in status_choices %}
+                  <a class="dropdown-item" href="#" data-status="{{ status }}">{{ status_display }}</a>
+              {% endfor %}
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger" href="#" data-anime-id="{{ anime.mal_id }}" data-action="remove">Remove from List</a>
+            </div>
+        </div>
+      {% else %}
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add to list
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for status, status_display in status_choices %}
+                    <a class="dropdown-item" href="#" data-status="{{ status }}">{{ status_display }}</a>
+                {% endfor %}
+            </div>
+        </div>
+      {% endif %}
+      {% endif %}
+      <p><strong>Title:</strong> {{ anime.title }}</p>
+      <p><strong>English Title:</strong> {{ anime.title_english }}</p>
+      <p><strong>Japanese Title:</strong> {{ anime.title_japanese }}</p>
+      <p><strong>Episodes:</strong> {{ anime.episodes }}</p>
+      <p><strong>Status:</strong> {{ anime.status }}</p>
+      <p><strong>Genres:</strong> {% for genre in anime.genres %} {{ genre.name }}{% if not forloop.last %}, {% endif %} {% endfor %}</p>
+      <p><strong>Year:</strong> {{ anime.aired.prop.from.year }}</p>
+      <p><strong>Studios:</strong> {% for studio in anime.studios %} {{ studio.name }}{% if not forloop.last %}, {% endif %} {% endfor %}</p>
+      <p><strong>Duration:</strong> {{ anime.duration }}</p>
+      <p><strong>Rank:</strong> #{{ anime.rank }}</p>
+    </div>
+    <div class="anime-details">
+      <h2>{{ anime.title }}</h2>
+      <p class="animesynopsis" style="text-align: justify;">{{ anime.synopsis }}</p>
+      {% if anime.trailer.embed_url %}
+        <div class="animetrailer">
+            <iframe width="780" height="439" 
+            src="{{ anime.trailer.embed_url }}" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen></iframe>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <hr class="list-separator">
+  {% if user.is_authenticated %}
+  <div class="comment-form">
+    <form method="post" action="{% url 'submit_comment' anime_id=anime.mal_id %}">
+      {% csrf_token %}
+      <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+      <textarea id="comment-textarea" class="form-control" name="comment" rows="1" placeholder="Add a comment" required></textarea>
+      <button type="submit">Comment</button>
+    </form>
+  </div>
+  {% else %}
+    <div class="comment-form">
+      <h5>You must be logged in to comment.</h5>
+    </div>
+  {% endif %}	
+  
+  <div class="comment-section">
+    <h3 style="margin-bottom: 20px;">Comments:</h3>
+    {% for comment in comments %}
+      <div class="comment" data-comment-id="{{ comment.id }}">
+        <img class="comment-avatar" src="{{ comment.user.profile.avatar.url }}" alt="{{ comment.user.username }}">
+        <div class="comment-content">
+          <div class="comment-header">
+            <div class="comment-user">{{ comment.user.username }}</div>
+            <div class="comment-timestamp">{{ comment.time_since_posted }}</div>
+          </div>
+          <p class="comment-text">{{ comment.text }}</p>
+          <div class="comment-actions">
+            {% if user == comment.user %}
+              <span class="comment-action editCommentBtn" data-comment-id="{{ comment.id }}">Edit</span>
+              <span class="comment-action deleteCommentBtn" data-comment-id="{{ comment.id }}">Delete</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <hr class="list-separator">
+      <div class="modal fade dark-modal" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control" id="commentEditTextarea" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="saveEditedComment">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade dark-modal" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteCommentModalLabel">Delete Comment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete your comment?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmDeleteComment">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<script>
+
+  function autoResizeTextarea(textarea) {
+    const minHeight = 42;
+    textarea.style.height = 'auto'; // Reset the height to auto before calculating the new height
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the new height based on scroll height
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      const commentTextarea = document.getElementById('comment-textarea');
+      commentTextarea.addEventListener('input', () => autoResizeTextarea(commentTextarea));
+      autoResizeTextarea(commentTextarea); // Call the function once to adjust the height initially
+  });
+
+  function removeAnimeFromWatchlist(animeId) {
+    const animeListItem = document.getElementById('anime_item_' + animeId);
+    animeListItem.remove();
+  }
+
+  function attachClickListenerToDropdownItem(item) {
+    item.addEventListener('click', handleDropdownItemClick);
+  }
+
+  function handleDropdownItemClick(event) {
+    event.preventDefault();
+    const action = event.target.dataset.action;
+    const animeId = event.target.dataset.animeId;
+    const status = event.target.dataset.status;
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    if (action === 'remove') {
+      fetch('{% url "remove_anime_from_list" anime_id=anime.mal_id %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          if (data.success) {
+            const mainButton = document.getElementById('dropdownMenuButton');
+            mainButton.textContent = 'Add to list';
+            mainButton.classList.remove('btn-secondary');
+            mainButton.classList.add('btn-primary');
+            const divider = document.querySelector('.dropdown-divider');
+            divider.remove();
+            const removeOption = document.querySelector('.dropdown-item.text-danger');
+            removeOption.remove();
+          } else {
+            alert('Failed to remove the anime. Please try again.');
+          }
+        });
+    } else {
+      fetch('{% url "update_anime_status" anime_id=anime.mal_id %}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({status: status})
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          if (data.success) {
+            const mainButton = document.getElementById('dropdownMenuButton');
+            mainButton.textContent = event.target.textContent;
+            mainButton.classList.remove('btn-primary');
+            mainButton.classList.add('btn-secondary');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const dividerExists = dropdownMenu.querySelector('.dropdown-divider');
+            if (!dividerExists) {
+              const divider = document.createElement('div');
+              divider.classList.add('dropdown-divider');
+              dropdownMenu.appendChild(divider);
+              const removeOption = document.createElement('a');
+              removeOption.classList.add('dropdown-item', 'text-danger');
+              removeOption.href = '#';
+              removeOption.dataset.animeId = animeId;
+              removeOption.dataset.action = 'remove';
+              removeOption.textContent = 'Remove from List';
+              dropdownMenu.appendChild(removeOption);
+
+              attachClickListenerToDropdownItem(removeOption);
+            }
+          } else {
+            alert('Failed to update the status. Please try again.');
+          }
+        })
+    }
+  }
+
+  document.querySelectorAll('.dropdown-item').forEach(attachClickListenerToDropdownItem);
+
+  document.querySelectorAll('.editCommentBtn').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      const commentId = event.target.dataset.commentId;
+      const commentText = document.querySelector('.comment[data-comment-id="' + commentId + '"] .comment-text');
+      document.getElementById('commentEditTextarea').value = commentText.textContent;
+      document.getElementById('saveEditedComment').dataset.commentId = commentId;
+      $('#editCommentModal').modal('show');
+    });
+  });
+
+  // Save edited comment button click handler
+  document.getElementById('saveEditedComment').addEventListener('click', function () {
+    const commentId = this.dataset.commentId;
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    const newText = document.getElementById('commentEditTextarea').value;
+
+    fetch('{% url "edit_comment" 0 %}'.replace('/0/', '/' + commentId + '/'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({ comment: newText })
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        document.querySelector('.comment[data-comment-id="' + commentId + '"] .comment-text').textContent = newText;
+        $('#editCommentModal').modal('hide');
+      } else {
+        alert('Failed to update the comment. Please try again.');
+      }
+    });
+  });
+
+  document.querySelectorAll('.deleteCommentBtn').forEach(btn => {
+    btn.addEventListener('click', function (event) {
+      const commentId = event.target.dataset.commentId;
+      document.getElementById('confirmDeleteComment').dataset.commentId = commentId;
+      $('#deleteCommentModal').modal('show');
+    });
+  });
+
+  document.getElementById('confirmDeleteComment').addEventListener('click', function () {
+    const commentId = this.dataset.commentId;
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    fetch('{% url "delete_comment" 0 %}'.replace('/0/', '/' + commentId + '/'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        const commentElement = document.querySelector('.comment[data-comment-id="' + commentId + '"]');
+        commentElement.remove();
+        const listSeparator = document.querySelector('.comment-section hr');
+        if (listSeparator) {
+          listSeparator.remove();
+        }
+      }
+    });
+  });
+</script>
+
+
+{% endblock %}

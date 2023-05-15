@@ -1,0 +1,13 @@
+{% extends "layout.html" %} {% block title %}Logout{% endblock title %} {% block content %}
+<div class="container text-center" style="display: flex; justify-content: center; align-items: center;">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">You have been logged out</h5>
+      <p class="card-text">Thanks for your using our website, contact me for any comments or suggestions using my email address.</p>
+      <hr class="list-separator" />
+      <a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

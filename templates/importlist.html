@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %}Import List{% endblock title %} {% block content %}
+
+    <div class="container">
+        <div class="importlist-form" style="text-align: start;">
+            <div class="row my-3 p-3">
+                <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer" />
+            </div>
+            <div class="form-content">
+                <form method="post" enctype="multipart/form-data" action="{% url 'importlist' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-5">
+                            <hr class="list-separator" />
+                            <h4>Import Anime List</h4>
+                            <div class="form-group xmlfile">
+                            <label class="small mb-1">Upload XML file:</label>
+                            <input type="file" name="anime_list_file" accept=".xml" />
+                            </div>
+                            <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" name="overwrite_existing" id="overwrite_existing" />
+                            <label class="form-check-label small mb-1" for="overwrite_existing">Overwrite anime already on my list</label>
+                            </div>
+                            <button type="submit" class="btn btn-dark btn-lg">Import Anime List</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
